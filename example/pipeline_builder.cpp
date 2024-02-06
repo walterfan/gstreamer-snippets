@@ -83,7 +83,7 @@ int PipelineBuilder::init(int argc, char *argv[]) {
     std::map<std::string, std::vector<std::string>> pipelines;
     int ret = yaml_to_str_vec_map(std::string(pipeline_config_file), "pipelines", pipelines);
     if (ret < 0 || pipelines.empty()) {
-        DEBUG_TRACE("PipelineBuilder init not found pipeline yaml: " << pipeline_config_file);
+        DEBUG_TRACE("PipelineBuilder init not read pipeline yaml: " << pipeline_config_file);
         return -1;
     }
 

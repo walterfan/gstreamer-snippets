@@ -213,44 +213,7 @@ std::chrono::milliseconds PlaylistComposer::last_scan_dir_duration() {
     auto now = sysclock::now();
     return std::chrono::duration_cast<std::chrono::milliseconds>(now - m_scan_dir_time);
 }
-/*
-int PlaylistComposer::find_playlists() {
-    if (last_scan_dir_duration().count() < m_scan_interval_ms) {
-        return m_src_playlists.size(); 
-    }
 
-    m_scan_dir_time = sysclock::now();
-    // Check if the directory exists
-    if (!std::filesystem::is_directory(m_folder)) {
-        std::cerr << "Directory not found." << std::endl;
-        return -1;
-    }
-
-    // Iterate through the files in the directory
-    for (const auto& entry : std::filesystem::directory_iterator(m_folder)) {
-        if (entry.is_regular_file()) {
-            auto filename = entry.path().filename().string();
-            if (startswith(filename, PLAYLIST_PREFIX) 
-                && endswith(filename, PLAYLIST_SUFFIX)) {
-                auto playlist = std::make_shared<HlsPlaylist>(entry.path().string());
-                int read_ret = playlist->read_m3u8_file();
-                if (read_ret < 0) {
-                    std::cerr << "read error of file " << filename << std::endl;
-                }
-                m_src_playlists.push_back(playlist);
-            }
-        }
-    }
-
-    if (m_src_playlists.empty()) {
-        return 0;
-    }
-    // Sort the file as timestamp in the filename
-    std::sort(m_src_playlists.begin(), m_src_playlists.end(), comparePlaylist);
-
-    return m_src_playlists.size();
-}
-*/
 int PlaylistComposer::find_playlists() {
     if (last_scan_dir_duration().count() < m_scan_interval_ms) {
         return m_src_playlists.size();

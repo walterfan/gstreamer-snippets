@@ -8,12 +8,9 @@
 #include <thread>
 #include <gst/gst.h>
 #include <glib.h>
-#include <filesystem>
 #include "time_util.h"
 #include "gst_util.h"
 #include "pipeline_controller.h"
-
-namespace fs = std::filesystem;
 
 static const GstPadProbeType pad_probe_type = GST_PAD_PROBE_TYPE_BLOCK_DOWNSTREAM;
 
@@ -161,7 +158,8 @@ int PipelineController::setup_elements() {
     }
 
     auto now = std::chrono::system_clock::now();
-    fs::create_directories("/tmp/record/");
+
+    std::system("mkdir -p /tmp/record/");
     std::string playlist_filename = get_format_time(now, "/tmp/record/playlist_{}.m3u8");
     std::string record_filename = get_format_time(now, "/tmp/record/record_{}_%05d.ts");
 

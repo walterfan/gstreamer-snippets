@@ -6,7 +6,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-#include <filesystem>
+
 #include "string_util.h"
 #define private public
 #include "hls_util.h"
@@ -14,7 +14,6 @@
 using namespace std;
 using namespace testing;
 
-namespace fs = std::filesystem;
 using sysclock = std::chrono::system_clock;
 using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
 
@@ -30,14 +29,14 @@ public:
         };
         
         m_test_folder = "/tmp/record_test"; 
-        fs::create_directories(m_test_folder);
+        std::system(("mkdir -p " + m_test_folder).c_str());
         
         for(auto num: m_numbers) {
             char buffer[64] = {0};
             snprintf(buffer, 64, "playlist_%llu.m3u8", num);
             std::string m3u8_file = buffer;
        
-            HlsPlaylist playlist((m_test_folder/m3u8_file).string());
+            HlsPlaylist playlist(m_test_folder + "/" + m3u8_file);
             for(int i=0; i<3; ++i) {
                 char buffer[128] = {0};
                 snprintf(buffer, 128, "record_%llu_0000%d.ts", num, i);
@@ -52,7 +51,7 @@ public:
 protected:
     TimePoint m_begin_time;
     TimePoint m_end_time;
-    fs::path m_test_folder;
+    std::string m_test_folder;
     std::vector<uint64_t> m_numbers;
 };
 
@@ -61,7 +60,7 @@ TEST_F(PlaylistUtilTest, PlaylistComposerFind) {
     m_begin_time = get_timepoint("20231019222805");
     m_end_time   = get_timepoint("20231019222817");
 
-    PlaylistComposer composer(m_test_folder.string(), m_begin_time, m_end_time);
+    PlaylistComposer composer(m_test_folder, m_begin_time, m_end_time);
     auto playlist_count = composer.find_playlists();
     cout << "found playlist count=" << playlist_count << endl;
     for(int i=0; i< playlist_count; ++i) {
@@ -81,7 +80,7 @@ TEST_F(PlaylistUtilTest, PlaylistComposerFindOne) {
     m_begin_time = get_timepoint("20231019224805");
     m_end_time   = get_timepoint("20231019224812");
 
-    PlaylistComposer composer(m_test_folder.string(), m_begin_time, m_end_time);
+    PlaylistComposer composer(m_test_folder, m_begin_time, m_end_time);
     auto playlist_count = composer.find_playlists();
     cout << "found playlist count=" << playlist_count << endl;
     for(int i=0; i< playlist_count; ++i) {
@@ -101,7 +100,7 @@ TEST_F(PlaylistUtilTest, PlaylistComposerFindNothing) {
     m_begin_time = get_timepoint("20231019224845");
     m_end_time   = get_timepoint("20231019224852");
 
-    PlaylistComposer composer(m_test_folder.string(), m_begin_time, m_end_time);
+    PlaylistComposer composer(m_test_folder, m_begin_time, m_end_time);
     auto playlist_count = composer.find_playlists();
     cout << "found playlist count=" << playlist_count << endl;
     for(int i=0; i< playlist_count; ++i) {
