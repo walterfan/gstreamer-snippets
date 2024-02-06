@@ -1,6 +1,8 @@
 # GStreamer Snippets
 
-Some snippets for gstreamer cookbook - [GStreamer cookbook](https://walterfan.github.io/gstreamer-cookbook/)
+Some snippets for gstreamer cookbook 
+
+- [GStreamer cookbook](https://walterfan.github.io/gstreamer-cookbook/)
 
 
 
@@ -37,6 +39,16 @@ brew install gstreamer
 brew install googletest
 ```
 
+
+for ubuntu, the google test library may not be found
+
+```sh
+sudo apt-get install libgtest-dev
+cd /usr/src/gtest
+sudo cmake .
+sudo cmake --build . --target install
+
+```
 
 ## Example
 * start SRS by docker
