@@ -22,10 +22,9 @@ gstreamer1.0-plugins-bad \
 gstreamer1.0-plugins-ugly \
 gstreamer1.0-plugins-good \
 libgstreamer-plugins-bad1.0-dev \
-gstreamer1.0-plugins-base-apps
+gstreamer1.0-plugins-base-apps \
 libfmt-dev \
 libspdlog-dev \
-yaml-cpp \
 libyaml-cpp-dev
 libgtest-dev
 ```
