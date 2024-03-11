@@ -32,6 +32,12 @@ target_link_libraries(gst-pipeline-verify
     spdlog::spdlog
 )
 
+if(LINUX) 
+    message(STATUS "Linux support inotify")
+    add_executable(file_monitor file_monitor.cpp)
+else()
+    message(STATUS "Not Linux with inotify")
+endif()
 
 target_link_libraries(gst-queue-exam ${GST_LIBRARIES})
 target_link_libraries(glib-example-1 ${GST_LIBRARIES})

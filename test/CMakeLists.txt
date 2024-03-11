@@ -24,6 +24,7 @@ target_include_directories(waltertest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(unit_test common_utils 
     gtest
     yaml-cpp
+    pthread
     ${GST_LIBRARIES})
 target_link_libraries(waltertest common_utils ${GST_LIBRARIES})
 
