@@ -6,6 +6,7 @@
 #include <iomanip> // for std::put_time
 #include <sstream> // for std::ostringstream
 #include <unistd.h>
+#include <poll.h>
 #include <sys/inotify.h>
 
 #define EVENT_SIZE (sizeof(struct inotify_event))
