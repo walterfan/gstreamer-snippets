@@ -1,10 +1,10 @@
 add_executable(gst-data-probe gst-data-probe.cpp)
 add_executable(gst-queue-exam gst-queue-exam.cpp)
 add_executable(gst-pipeline-verify 
-    pipeline_builder.cpp 
+    pipeline_builder.cpp
     gst-pipeline-verify.cpp
 )
-
+add_executable(gst-appsink gst-appsink.cpp)
 add_executable(gst-fakesink gst-fakesink.cpp)
 add_executable(gst-audio-record gst-audio-record.cpp)
 add_executable(gst-video-record gst-video-record.cpp)
@@ -26,7 +26,7 @@ target_link_libraries(gst-data-probe
 )
 
 target_link_libraries(gst-pipeline-verify
-    ${GST_LIBRARIES} 
+    ${GST_LIBRARIES}
     common_utils 
     fmt::fmt 
     spdlog::spdlog
@@ -45,6 +45,7 @@ target_link_libraries(hls-test common_utils ${GST_LIBRARIES} fmt::fmt)
 target_link_libraries(hls-exam common_utils ${GST_LIBRARIES} fmt::fmt)
 target_link_libraries(m3u8_reader common_utils ${GST_LIBRARIES} fmt::fmt)
 
+target_link_libraries(gst-appsink ${GST_LIBRARIES} opencv::opencv)
 target_link_libraries(gst-fakesink ${GST_LIBRARIES})
 target_link_libraries(gst-audio-record ${GST_LIBRARIES})
 target_link_libraries(gst-video-record ${GST_LIBRARIES})

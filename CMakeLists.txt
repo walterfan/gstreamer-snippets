@@ -31,6 +31,7 @@ endif()
 find_package(fmt CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(yaml-cpp CONFIG REQUIRED)
+find_package(opencv CONFIG REQUIRED)
 
 if(NOT spdlog_FOUND)
     message(WARNING "spdlog not found!")
@@ -40,7 +41,7 @@ endif(NOT spdlog_FOUND)
 
 include_directories(${CMAKE_SOURCE_DIR}/util)
 
-set(GST_LIBRARIES -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0)
+set(GST_LIBRARIES -lgstreamer-1.0 -lgstapp-1.0 -lgobject-2.0 -lglib-2.0)
 set(GST_RTC_LIBS -lgstwebrtc-1.0 -lgstsdp-1.0 -lgstrtp-1.0 -lsoup-2.4 -ljson-glib-1.0)
 
 add_subdirectory(util)
