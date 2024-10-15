@@ -232,7 +232,7 @@ int GstVideoRecorder::make_elements() {
 
 int GstVideoRecorder::add_elements() {
     for(auto& desc: m_elements_desc) {
-        if(!gst_bin_add(GST_BIN(m_pipeline), desc.m_element)) { 
+        if(!gst_bin_add(GST_BIN(m_pipeline), desc.m_element)) {
             std::cerr << "add element failed: " << desc.m_name << std::endl;
             return -1;
         } 
